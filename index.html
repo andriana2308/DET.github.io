@@ -69,11 +69,17 @@
             color: #ff8fab;
         }
 
+        /* Glowing Footer Text */
         footer {
             margin: 50px 20px;
-            opacity: 0.8;
-            font-size: 14px;
-        
+            padding: 15px 25px;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 16px;
+            text-shadow:
+                0 0 8px #ffffff,
+                0 0 15px #ff8fab,
+                0 0 30px #ff8fab;
         }
 
         /* FULL SCREEN ENTRANCE (NO GAPS) */
@@ -99,13 +105,23 @@
             margin-top: 20px;
         }
 
+        /* Gallery Images with Scroll Animation */
         .gallery img {
             width: 100%;
             height: 220px;
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transition: transform 0.3s;
+            transition: all 0.8s ease;
+
+            /* For scroll animation */
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .gallery img.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .gallery img:hover {
@@ -224,6 +240,26 @@
             sparkle.remove();
         }, 5000);
     }, 300);
+
+    // Reveal gallery images one by one on scroll
+    const images = document.querySelectorAll(".gallery img");
+
+    function revealOnScroll() {
+        images.forEach((img, index) => {
+            const imgTop = img.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (imgTop < windowHeight - 50) {
+                setTimeout(() => {
+                    img.classList.add("show");
+                }, index * 300); // delay between each image
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+
 </script>
 
 </body>
