@@ -10,11 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Dancing+Script&display=swap" rel="stylesheet">
 
     <style>
-
-        /* Remove ALL default gaps */
+        /* Remove default gaps */
         html, body {
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -82,7 +82,7 @@
                 0 0 30px #ff8fab;
         }
 
-        /* FULL SCREEN ENTRANCE (NO GAPS) */
+        /* FULL SCREEN ENTRANCE */
         #entrance {
             position: fixed;
             top: 0;
@@ -97,35 +97,29 @@
             z-index: 9999;
         }
 
-        /* Gallery Responsive Grid */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        /* Gallery Images with Scroll Animation */
-        .gallery img {
+        /* Full-screen vertical scroll images */
+        .scroll-image {
             width: 100%;
-            height: 220px;
+            min-height: 100vh;
             object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transition: all 0.8s ease;
-
-            /* For scroll animation */
             opacity: 0;
             transform: translateY(40px);
+            transition: all 1s ease;
         }
 
-        .gallery img.show {
+        .scroll-image.show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .gallery img:hover {
-            transform: scale(1.05);
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 40px;
+            }
+            .scroll-image {
+                height: 100vh;
+            }
         }
 
         /* Sparkles */
@@ -142,18 +136,6 @@
             0% { transform: translateY(-10px); opacity: 1; }
             100% { transform: translateY(100vh); opacity: 0; }
         }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 40px;
-            }
-
-            .gallery img {
-                height: 180px;
-            }
-        }
-
     </style>
 </head>
 
@@ -183,17 +165,12 @@
     <div id="countdown"></div>
 </div>
 
-<!-- Photo Gallery -->
-<div class="box">
-    <h2>✨ Enchanted Moments ✨</h2>
-    <div class="gallery">
-        <img src="30.jpg">
-        <img src="31.jpg">
-        <img src="32.jpg">
-        <img src="33.jpg">
-        <img src="34.jpg">
-    </div>
-</div>
+<!-- Full-screen vertical scroll gallery -->
+<img src="30.jpg" class="scroll-image">
+<img src="31.jpg" class="scroll-image">
+<img src="32.jpg" class="scroll-image">
+<img src="33.jpg" class="scroll-image">
+<img src="34.jpg" class="scroll-image">
 
 <footer>
     ✨ A night of magic, elegance, and unforgettable memories ✨
@@ -241,25 +218,20 @@
         }, 5000);
     }, 300);
 
-    // Reveal gallery images one by one on scroll
-    const images = document.querySelectorAll(".gallery img");
+    // Reveal full-screen images one by one on scroll
+    const scrollImages = document.querySelectorAll(".scroll-image");
 
-    function revealOnScroll() {
-        images.forEach((img, index) => {
-            const imgTop = img.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-
-            if (imgTop < windowHeight - 50) {
-                setTimeout(() => {
-                    img.classList.add("show");
-                }, index * 300); // delay between each image
+    function revealImages() {
+        scrollImages.forEach((img) => {
+            const rect = img.getBoundingClientRect();
+            if(rect.top < window.innerHeight * 0.9){
+                img.classList.add("show");
             }
         });
     }
 
-    window.addEventListener("scroll", revealOnScroll);
-    window.addEventListener("load", revealOnScroll);
-
+    window.addEventListener("scroll", revealImages);
+    window.addEventListener("load", revealImages);
 </script>
 
 </body>
