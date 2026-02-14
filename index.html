@@ -10,7 +10,9 @@
             margin: 0;
             font-family: 'Playfair Display', serif;
             text-align: center;
-            background: linear-gradient(to bottom, #d8f3dc, #fce4ec);
+            background: url("enchanted.jpg")
+        no-repeat center center fixed;
+            background-size: cover;
             color: #2d6a4f;
             overflow-x: hidden;
         }
@@ -118,7 +120,7 @@
 
 <!-- Background Music -->
 <audio id="bgMusic" loop>
-    <source src="your-music-file.mp3" type="audio/mpeg">
+    <source src="18.mp3" type="audio/mpeg">
 </audio>
 
 <h1>Enchanted at Eighteen ✨</h1>
@@ -157,7 +159,7 @@
     }
 
     // Countdown
-    var countDownDate = new Date("Feb 28, 2026 18:00:00").getTime();
+    var countDownDate = new Date("Feb 28, 2026 16:00:00").getTime();
 
     var x = setInterval(function() {
         var now = new Date().getTime();
