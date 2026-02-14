@@ -97,13 +97,16 @@
             z-index: 9999;
         }
 
-        /* Full-screen vertical scroll images */
+        /* Scroll-reveal images */
         .scroll-image {
-            width: 100%;
-            min-height: 100vh;
+            width: 80%;             /* visible but not full screen */
+            max-width: 600px;       /* limit size on big screens */
+            margin: 40px auto;      /* spacing around each image */
+            height: auto;           /* keep aspect ratio */
             object-fit: cover;
+            border-radius: 20px;
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: all 1s ease;
         }
 
@@ -118,7 +121,8 @@
                 font-size: 40px;
             }
             .scroll-image {
-                height: 100vh;
+                width: 90%;
+                margin: 30px auto;
             }
         }
 
@@ -160,12 +164,12 @@
     <p>📅 February 28, 2026</p>
     <p>⏰ 4:00 PM</p>
     <p>📍 Sweet Mommy's</p>
-    <p>🎀 Dress Code: Enchanted Garden – Mint Green, Blush Pink, Soft Pastels</p>
+    <p>🎀 Dress Code: Enchanted Garden – Shades of Green & Shades of Pink</p>
 
     <div id="countdown"></div>
 </div>
 
-<!-- Full-screen vertical scroll gallery -->
+<!-- Vertical scroll gallery -->
 <img src="30.jpg" class="scroll-image">
 <img src="31.jpg" class="scroll-image">
 <img src="32.jpg" class="scroll-image">
@@ -218,7 +222,7 @@
         }, 5000);
     }, 300);
 
-    // Reveal full-screen images one by one on scroll
+    // Reveal images on scroll
     const scrollImages = document.querySelectorAll(".scroll-image");
 
     function revealImages() {
